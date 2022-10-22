@@ -1,11 +1,19 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
+import NewsSummaryCart from '../Shared/NewsSummaryCart/NewsSummaryCart';
 
 const Category = () => {
-    const news = useLoaderData()
+    const categoryNews = useLoaderData()
     return (
         <div>
-            <h1>category {news.length}</h1>
+            <h4>Total news in this category {categoryNews.length}</h4>
+        {
+            categoryNews.map(news => <NewsSummaryCart
+            key={news._id}
+            news={news}
+            >
+            </NewsSummaryCart>)
+        }
         </div>
     );
 };
