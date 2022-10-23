@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { AuthContext } from '../../../../context/AuthProvider/AuthProvider';
 const Login = () => {
     const {signIn}= useContext(AuthContext)
     const navigate= useNavigate()
+    const [error, setError]= useState('')
 
     const handleSignIn = event =>{
         event.preventDefault();
@@ -19,9 +20,13 @@ const Login = () => {
             const user=result.user;
             console.log(user)
             form.reset()
+            setError('')
             navigate('/')
         })
-        .catch(error => console.error(error))
+        .catch(error => 
+           { console.error(error)
+            setError(error.message)}
+            )
     }
     return (
         <Form onSubmit={handleSignIn}>
@@ -39,8 +44,8 @@ const Login = () => {
             <Button variant="warning" type="submit">
                 Submit
             </Button>
-            <Form.Text className="text-muted">
-                    
+            <Form.Text className="text-danger">
+                    <br/> {error}
                 </Form.Text>
         </Form>
 
