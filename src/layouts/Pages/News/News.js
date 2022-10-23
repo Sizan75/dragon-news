@@ -14,6 +14,7 @@ const News = () => {
             <Card.Img variant="top" src="holder.js/100px180" />
             <Card.Body>
                 <Card.Title>{title}</Card.Title>
+                <Card.Img variant="top" src={image_url} />
                 <Card.Text>
                     {details}
                 </Card.Text>
